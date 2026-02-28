@@ -100,9 +100,9 @@
             transform: translateY(0);
         }
 
-        /* --- NAKBA TEXT STYLING (MOKOTO STYLE) --- */
+        /* --- NAKBA TEXT STYLING --- */
         .brand-name {
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            font-family: 'Orbitron', sans-serif; 
             font-size: clamp(3rem, 12vw, 7rem);
             font-weight: 900;
             letter-spacing: 8px;
@@ -111,11 +111,11 @@
         }
 
         /* Specific Letter Colors */
-        .char-n { color: #FF0000; } /* N - White (Assuming N follows 1st A) */
-        .char-a1 { color: #ffffff; } /* 1st A - White */
-        .char-k { color: #00FF00; } /* K - Green */
-        .char-b { color: #ffffff; } /* B - White */
-        .char-a2 { color: #FF0000; } /* 2nd A - Red */
+        .char-n { color: #FF0000; } 
+        .char-a1 { color: #ffffff; } 
+        .char-k { color: #00FF00; } 
+        .char-b { color: #ffffff; } 
+        .char-a2 { color: #FF0000; } 
 
         .hero p { color: #888; margin-bottom: 35px; font-size: 1.1rem; max-width: 500px; }
 
@@ -131,7 +131,7 @@
         }
         .btn:hover { background: #fff; color: #000; }
 
-        /* --- HOODIE GRID --- */
+        /* --- HOODIE GRID (The Fix Area) --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -145,6 +145,7 @@
             padding: 15px;
             transition: var(--transition);
             border: 1px solid #1a1a1a;
+            overflow: hidden; /* Keeps zoom effect inside */
         }
 
         .card:hover {
@@ -152,38 +153,64 @@
             border-color: #444;
         }
 
+        /* 1. The Container Fix: Forces a perfect square */
         .img-container {
             width: 100%;
-            aspect-ratio: 1/1;
-            background: #222;
+            aspect-ratio: 1 / 1; /* Pure square container */
+            background: #1a1a1a; /* Background if image loads slow */
             margin-bottom: 15px;
-            overflow: hidden;
+            overflow: hidden; /* Hides extra parts of large images */
+            position: relative; /* For centering */
         }
 
+        /* 2. The Image Fix: Forces large images to fit and center */
         .collection-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* CROPS the image to fill the square perfectly */
+            object-position: center; /* Centers the crop on the hoodie */
             transition: transform 0.5s ease;
+            display: block;
         }
 
-        .card:hover .collection-img { transform: scale(1.1); }
+        .card:hover .collection-img { transform: scale(1.05); }
         .card p { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
+        /* --- ABOUT & CONTACT --- */
         .about-content { max-width: 650px; line-height: 1.8; }
         .about-content h2 { margin-bottom: 20px; font-size: 2.5rem; }
 
         .contact-links a { color: #fff; text-decoration: none; font-weight: bold; border-bottom: 1px solid #333; }
         .contact-links p { margin: 15px 0; color: #666; }
 
+        /* --- TABLET VIEW --- */
         @media (max-width: 1024px) {
-            .grid { grid-template-columns: repeat(2, 1fr); }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .nav-links { gap: 15px; }
         }
+
+        /* --- MOBILE VIEW (Forced 2-Column & Small) --- */
         @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
+            .grid { 
+                grid-template-columns: 1fr 1fr !important; /* Force 2 columns */
+                gap: 12px !important; 
+                padding: 0 10px !important;
+            }
+            .img-container {
+                aspect-ratio: 1 / 1 !important; /* Keep mobile squares */
+                margin-bottom: 8px !important;
+            }
+            .card { 
+                padding: 10px !important; 
+                border-radius: 4px;
+            }
+            .card p { 
+                font-size: 0.6rem !important; 
+                letter-spacing: 0.5px;
+            }
+            .brand-name { font-size: 3rem; letter-spacing: 4px; }
             .logo-tagline { display: none; }
-            .brand-name { font-size: 3.5rem; letter-spacing: 4px; }
+            .main-logo { height: 32px; }
         }
     </style>
 </head>
@@ -216,32 +243,51 @@
         </section>
 
         <section id="collection" class="page-section">
-            <h2 style="margin-bottom: 40px; letter-spacing: 5px;">COLLECTION</h2>
+            <h2 style="margin-bottom: 40px; letter-spacing: 5px; font-weight: 800; color: #fff;">COLLECTION</h2>
             <div class="grid">
+                
                 <div class="card">
-                    <div class="img-container"><img src="https://via.placeholder.com/500" class="collection-img"></div>
+                    <div class="img-container">
+                        <img src="https://uploads.onecompiler.io/4428dypdk/44exxytbe/WhatsApp%20Image%202026-02-28%20at%204.31.38%20PM.jpeg" alt="Core Hoodie v1" class="collection-img">
+                    </div>
                     <p>Core Hoodie v1</p>
                 </div>
+
                 <div class="card">
-                    <div class="img-container"><img src="https://via.placeholder.com/500" class="collection-img"></div>
+                    <div class="img-container">
+                        <img src="https://uploads.onecompiler.io/4428dypdk/44exxytbe/WhatsApp%20Image%202026-02-28%20at%204.31.38%20PM%20(5).jpeg" alt="Core Hoodie v2" class="collection-img">
+                    </div>
                     <p>Core Hoodie v2</p>
                 </div>
+
                 <div class="card">
-                    <div class="img-container"><img src="https://via.placeholder.com/500" class="collection-img"></div>
+                    <div class="img-container">
+                        <img src="https://uploads.onecompiler.io/4428dypdk/44exxytbe/WhatsApp%20Image%202026-02-28%20at%204.31.38%20PM%20(4).jpeg" alt="Core Hoodie v3" class="collection-img">
+                    </div>
                     <p>Core Hoodie v3</p>
                 </div>
+
                 <div class="card">
-                    <div class="img-container"><img src="https://via.placeholder.com/500" class="collection-img"></div>
+                    <div class="img-container">
+                        <img src="https://uploads.onecompiler.io/4428dypdk/44exxytbe/WhatsApp%20Image%202026-02-28%20at%204.31.38%20PM%20(3).jpeg" alt="Midnight Drop" class="collection-img">
+                    </div>
                     <p>Midnight Drop</p>
                 </div>
+
                 <div class="card">
-                    <div class="img-container"><img src="https://via.placeholder.com/500" class="collection-img"></div>
+                    <div class="img-container">
+                        <img src="https://uploads.onecompiler.io/4428dypdk/44exxytbe/WhatsApp%20Image%202026-02-28%20at%204.31.38%20PM%20(2).jpeg" alt="Onyx Essential" class="collection-img">
+                    </div>
                     <p>Onyx Essential</p>
                 </div>
+
                 <div class="card">
-                    <div class="img-container"><img src="https://via.placeholder.com/500" class="collection-img"></div>
+                    <div class="img-container">
+                        <img src="https://uploads.onecompiler.io/4428dypdk/44exxytbe/WhatsApp%20Image%202026-02-28%20at%204.31.37%20PM.jpeg" alt="Phantom Fleece" class="collection-img">
+                    </div>
                     <p>Phantom Fleece</p>
                 </div>
+
             </div>
         </section>
 
@@ -255,8 +301,8 @@
         <section id="contact" class="page-section">
             <h2 style="margin-bottom: 20px;">Get In Touch</h2>
             <div class="contact-links">
-                <p>Instagram: <a href="https://instagram.com" target="_blank">@nakba.jo</a></p>
-                <p>Email: <a href="mailto:hello@yourbrand.com">nakba.jo@gmail.com</a></p>
+                <p>Instagram: <a href="https://instagram.com/nakba.jo" target="_blank">@nakba.jo</a></p>
+                <p>Email: <a href="mailto:nakba.jo@gmail.com">nakba.jo@gmail.com</a></p>
             </div>
         </section>
     </main>
@@ -275,3 +321,4 @@
     </script>
 </body>
 </html>
+
